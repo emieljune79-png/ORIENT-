@@ -24,7 +24,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 420px;
+    max-width: 430px;
     padding: 20px;
 }
 
@@ -49,16 +49,14 @@ body {
     font-size: 30px;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
-    font-size: 25px;
 }
 
 .subtitle {
     text-align: center;
     color: #89968e;
-    margin-top: 7px;
-    margin-bottom: 25px;
+    margin: 8px 0 25px;
     font-size: 14px;
 }
 
@@ -82,7 +80,6 @@ h1 {
 .tab.active {
     background: #356447;
     color: white;
-    border-color: #4b805f;
 }
 
 .form {
@@ -111,11 +108,8 @@ input {
     outline: none;
 }
 
-input:focus {
-    border-color: #4b805f;
-}
-
-button.login {
+.login,
+.action {
     width: 100%;
     padding: 14px;
     border: none;
@@ -126,70 +120,81 @@ button.login {
     cursor: pointer;
 }
 
-button.login:hover {
+.login:hover,
+.action:hover {
     background: #417a56;
 }
 
 .message {
+    display: none;
     margin-top: 17px;
     padding: 12px;
     border-radius: 8px;
     text-align: center;
     font-size: 13px;
-    display: none;
 }
 
 .message.show {
     display: block;
 }
 
-.message.error {
+.error {
     background: #351b1b;
     color: #ff9d9d;
 }
 
-.message.success {
+.success {
     background: #193523;
     color: #9ce0ad;
 }
 
 .panel {
     display: none;
-    text-align: center;
 }
 
 .panel.active {
     display: block;
 }
 
-.panel h2 {
-    margin-bottom: 12px;
-}
-
 .panel p {
     color: #9ba69f;
+    text-align: center;
     line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.action {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    border-radius: 9px;
-    border: none;
-    background: #356447;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
+    margin: 12px 0 20px;
 }
 
 .logout {
+    margin-top: 10px;
     background: transparent;
     border: 1px solid #2c3931;
     color: #9ba69f;
+}
+
+.user-row {
+    background: #0c110e;
+    border: 1px solid #29352d;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+.user-row strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-row small {
+    color: #89968e;
+}
+
+.approve {
+    margin-top: 10px;
+    padding: 9px 14px;
+    border: none;
+    border-radius: 7px;
+    background: #356447;
+    color: white;
+    cursor: pointer;
 }
 
 .hidden {
@@ -202,164 +207,211 @@ button.login:hover {
 
 <div class="container">
 
-    <!-- LOGIN CARD -->
-    <div class="card" id="loginCard">
+<!-- LOGIN -->
 
-        <div class="logo">🎖️</div>
+<div class="card" id="loginCard">
 
-        <h1>TRADOC Orientation</h1>
-        <p class="subtitle">Authorized Access Portal</p>
+    <div class="logo">🎖️</div>
 
-        <div class="tabs">
+    <h1>TRADOC Orientation</h1>
 
-            <button class="tab active" id="userTab"
-                onclick="switchLogin('user')">
-                USER
-            </button>
+    <p class="subtitle">
+        Authorized Access Portal
+    </p>
 
-            <button class="tab" id="adminTab"
-                onclick="switchLogin('admin')">
-                ADMIN
-            </button>
-
-        </div>
-
-
-        <!-- USER LOGIN -->
-
-        <form id="userForm"
-              class="form active"
-              onsubmit="userLogin(event)">
-
-            <label>Email</label>
-
-            <input
-                type="email"
-                id="userEmail"
-                placeholder="Enter your email"
-                required
-            >
-
-            <label>Password</label>
-
-            <input
-                type="password"
-                id="userPassword"
-                placeholder="Enter your password"
-                required
-            >
-
-            <button class="login" type="submit">
-                USER LOGIN
-            </button>
-
-        </form>
-
-
-        <!-- ADMIN LOGIN -->
-
-        <form id="adminForm"
-              class="form"
-              onsubmit="adminLogin(event)">
-
-            <label>Admin Email</label>
-
-            <input
-                type="email"
-                id="adminEmail"
-                placeholder="Enter admin email"
-                required
-            >
-
-            <label>Admin Password</label>
-
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Enter admin password"
-                required
-            >
-
-            <button class="login" type="submit">
-                ADMIN LOGIN
-            </button>
-
-        </form>
-
-        <div id="message" class="message"></div>
-
-    </div>
-
-
-    <!-- USER PANEL -->
-
-    <div class="card panel" id="userPanel">
-
-        <div class="logo">✓</div>
-
-        <h2>Access Approved</h2>
-
-        <p>
-            Your account has been approved.
-            You may now access the TRADOC Orientation.
-        </p>
-
-        <!-- PUT YOUR CANVA LINK HERE -->
-
-        <a
-            href="YOUR_CANVA_LINK_HERE"
-            target="_blank"
-            class="action">
-            OPEN ORIENTATION
-        </a>
+    <div class="tabs">
 
         <button
-            class="action logout"
-            onclick="logout()">
-            LOGOUT
+            class="tab active"
+            id="userTab"
+            onclick="switchLogin('user')">
+            USER
+        </button>
+
+        <button
+            class="tab"
+            id="adminTab"
+            onclick="switchLogin('admin')">
+            ADMIN
         </button>
 
     </div>
 
 
-    <!-- ADMIN PANEL -->
+    <!-- USER LOGIN -->
 
-    <div class="card panel" id="adminPanel">
+    <form
+        id="userForm"
+        class="form active"
+        onsubmit="userLogin(event)">
 
-        <div class="logo">🛡️</div>
+        <label>Email</label>
 
-        <h2>Admin Command</h2>
+        <input
+            type="email"
+            id="userEmail"
+            placeholder="Enter your email"
+            required>
 
-        <p>
-            Administrator access granted.
-        </p>
+        <label>Password</label>
 
-        <button
-            class="action"
-            onclick="openApproval()">
-            APPROVE USERS
+        <input
+            type="password"
+            id="userPassword"
+            placeholder="Enter your password"
+            required>
+
+        <button class="login">
+            USER LOGIN
         </button>
 
-        <button
-            class="action logout"
-            onclick="logout()">
-            LOGOUT
+    </form>
+
+
+    <!-- ADMIN LOGIN -->
+
+    <form
+        id="adminForm"
+        class="form"
+        onsubmit="adminLogin(event)">
+
+        <label>Admin Email</label>
+
+        <input
+            type="email"
+            id="adminEmail"
+            placeholder="Enter admin email"
+            required>
+
+        <label>Admin Password</label>
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Enter admin password"
+            required>
+
+        <button class="login">
+            ADMIN LOGIN
         </button>
 
-    </div>
+    </form>
+
+    <div id="message" class="message"></div>
+
+</div>
+
+
+<!-- USER PANEL -->
+
+<div class="card panel" id="userPanel">
+
+    <div class="logo">✓</div>
+
+    <h2>Access Approved</h2>
+
+    <p>
+        Your account has been approved.
+        You may now access the orientation.
+    </p>
+
+    <a
+        href="YOUR_CANVA_LINK_HERE"
+        target="_blank"
+        class="action"
+        style="display:block;text-align:center;text-decoration:none;">
+        OPEN ORIENTATION
+    </a>
+
+    <button
+        class="action logout"
+        onclick="logout()">
+        LOGOUT
+    </button>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+
+<div class="card panel" id="adminPanel">
+
+    <div class="logo">🛡️</div>
+
+    <h2>Admin Command</h2>
+
+    <p>
+        Administrator access granted.
+    </p>
+
+    <div id="pendingUsers"></div>
+
+    <button
+        class="action logout"
+        onclick="logout()">
+        LOGOUT
+    </button>
+
+</div>
 
 </div>
 
 
 <script>
 
+/*
+=========================================
+ADMIN CREDENTIAL
+=========================================
+
+IMPORTANT:
+This is NOT secure because GitHub Pages
+is public.
+
+For a real secure system, use a backend.
+*/
+
+const ADMIN_EMAIL = "emieljune79@gmail.com";
+
+/*
+Do NOT use your real password here.
+Replace this with a temporary demo password
+if you understand that it is public.
+*/
+
+const ADMIN_PASSWORD = "CHANGE_THIS_PASSWORD";
+
+
+/*
+=========================================
+USER DATABASE
+=========================================
+*/
+
+let users = JSON.parse(
+    localStorage.getItem("tradocUsers")
+) || [];
+
+
+/*
+=========================================
+SWITCH LOGIN
+=========================================
+*/
+
 function switchLogin(type) {
 
-    const userForm = document.getElementById("userForm");
-    const adminForm = document.getElementById("adminForm");
+    const userForm =
+        document.getElementById("userForm");
 
-    const userTab = document.getElementById("userTab");
-    const adminTab = document.getElementById("adminTab");
+    const adminForm =
+        document.getElementById("adminForm");
+
+    const userTab =
+        document.getElementById("userTab");
+
+    const adminTab =
+        document.getElementById("adminTab");
 
     clearMessage();
 
@@ -383,53 +435,232 @@ function switchLogin(type) {
 }
 
 
+/*
+=========================================
+USER LOGIN
+=========================================
+*/
+
 function userLogin(event) {
 
     event.preventDefault();
 
-    /*
-       SUPABASE AUTH WILL GO HERE.
+    const email =
+        document.getElementById("userEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
-       User account will be checked for:
-       - Valid email
-       - Valid password
-       - Approval status
+    const password =
+        document.getElementById("userPassword")
+        .value;
+
+    let user = users.find(
+        u => u.email === email
+    );
+
+    /*
+    First login:
+    create pending account.
     */
 
-    showMessage(
-        "User authentication is not connected yet.",
-        "error"
-    );
+    if (!user) {
+
+        user = {
+            email: email,
+            password: password,
+            approved: false
+        };
+
+        users.push(user);
+
+        saveUsers();
+
+        showMessage(
+            "Account created. Waiting for admin approval.",
+            "success"
+        );
+
+        return;
+    }
+
+    /*
+    Check password
+    */
+
+    if (user.password !== password) {
+
+        showMessage(
+            "Incorrect password.",
+            "error"
+        );
+
+        return;
+    }
+
+    /*
+    Check approval
+    */
+
+    if (!user.approved) {
+
+        showMessage(
+            "Your account is still waiting for approval.",
+            "error"
+        );
+
+        return;
+    }
+
+    /*
+    Approved
+    */
+
+    document.getElementById("loginCard")
+        .classList.add("hidden");
+
+    document.getElementById("userPanel")
+        .classList.add("active");
 }
 
+
+/*
+=========================================
+ADMIN LOGIN
+=========================================
+*/
 
 function adminLogin(event) {
 
     event.preventDefault();
 
-    /*
-       IMPORTANT:
-       Do NOT put the admin password here.
+    const email =
+        document.getElementById("adminEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
-       Admin authentication will be handled
-       securely by Supabase.
-    */
+    const password =
+        document.getElementById("adminPassword")
+        .value;
 
-    showMessage(
-        "Admin authentication is not connected yet.",
-        "error"
+    if (
+        email === ADMIN_EMAIL.toLowerCase() &&
+        password === ADMIN_PASSWORD
+    ) {
+
+        document.getElementById("loginCard")
+            .classList.add("hidden");
+
+        document.getElementById("adminPanel")
+            .classList.add("active");
+
+        loadPendingUsers();
+
+    } else {
+
+        showMessage(
+            "Invalid admin credentials.",
+            "error"
+        );
+    }
+}
+
+
+/*
+=========================================
+ADMIN APPROVAL
+=========================================
+*/
+
+function loadPendingUsers() {
+
+    const container =
+        document.getElementById("pendingUsers");
+
+    container.innerHTML = "";
+
+    const pending =
+        users.filter(u => !u.approved);
+
+    if (pending.length === 0) {
+
+        container.innerHTML = `
+            <p>
+                No users are waiting for approval.
+            </p>
+        `;
+
+        return;
+    }
+
+    pending.forEach(user => {
+
+        const row =
+            document.createElement("div");
+
+        row.className = "user-row";
+
+        row.innerHTML = `
+            <strong>${escapeHTML(user.email)}</strong>
+            <small>Pending Approval</small>
+            <br>
+            <button
+                class="approve"
+                onclick="approveUser('${encodeURIComponent(user.email)}')">
+                APPROVE
+            </button>
+        `;
+
+        container.appendChild(row);
+    });
+}
+
+
+/*
+=========================================
+APPROVE USER
+=========================================
+*/
+
+function approveUser(encodedEmail) {
+
+    const email =
+        decodeURIComponent(encodedEmail);
+
+    const user =
+        users.find(u => u.email === email);
+
+    if (!user) return;
+
+    user.approved = true;
+
+    saveUsers();
+
+    loadPendingUsers();
+}
+
+
+/*
+=========================================
+SAVE USERS
+=========================================
+*/
+
+function saveUsers() {
+
+    localStorage.setItem(
+        "tradocUsers",
+        JSON.stringify(users)
     );
 }
 
 
-function openApproval() {
-
-    alert(
-        "Approval Management will be connected to the database."
-    );
-
-}
-
+/*
+=========================================
+LOGOUT
+=========================================
+*/
 
 function logout() {
 
@@ -449,9 +680,16 @@ function logout() {
 }
 
 
+/*
+=========================================
+MESSAGES
+=========================================
+*/
+
 function showMessage(text, type) {
 
-    const message = document.getElementById("message");
+    const message =
+        document.getElementById("message");
 
     message.textContent = text;
 
@@ -462,11 +700,29 @@ function showMessage(text, type) {
 
 function clearMessage() {
 
-    const message = document.getElementById("message");
+    const message =
+        document.getElementById("message");
 
     message.textContent = "";
 
     message.className = "message";
+}
+
+
+/*
+=========================================
+SECURITY FOR DISPLAYED EMAIL
+=========================================
+*/
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
 }
 
 </script>
